@@ -901,13 +901,16 @@ newanim:
 	}
 	else if (run)
 	{	// running
+		
 		if (duck)
 		{
+
 			ent->s.frame = FRAME_crwalk1;
 			client->anim_end = FRAME_crwalk6;
 		}
 		else
 		{
+
 			ent->s.frame = FRAME_run1;
 			client->anim_end = FRAME_run6;
 		}

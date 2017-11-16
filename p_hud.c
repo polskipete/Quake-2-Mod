@@ -245,9 +245,16 @@ void DeathmatchScoreboard (edict_t *ent)
 	DeathmatchScoreboardMessage (ent, ent->enemy);
 	gi.unicast (ent, true);
 }
+edict_t	*spot;
+vec3_t	d;
 
+void Cmd_Teleport_f (edict_t *self)//Kolesnik Teleport Function
+{	
+	self->s.event = EV_PLAYER_TELEPORT;
+	self->s.origin[0]+=400;
+}
 
-/*
+/*Kolesnik : How to write a function for Teleport/Movment
 ==================
 Cmd_Score_f
 

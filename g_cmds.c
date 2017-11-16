@@ -910,9 +910,14 @@ void ClientCommand (edict_t *ent)
 		Cmd_Say_f (ent, true, false);
 		return;
 	}
-	if (Q_stricmp (cmd, "score") == 0)
+	if (Q_stricmp (cmd, "score") == 0)//Kolesnik : How to bind new key
 	{
 		Cmd_Score_f (ent);
+		return;
+	}
+	if (Q_stricmp(cmd, "teleport") == 0)//Kolesnik : How to bind new key
+	{
+		Cmd_Teleport_f(ent);
 		return;
 	}
 	if (Q_stricmp (cmd, "help") == 0)
