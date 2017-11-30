@@ -255,7 +255,7 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 	if (other->client->pers.max_slugs < 100)
 		other->client->pers.max_slugs = 100;
 
-	item = FindItem("Bullets");
+	item = FindItem("Bullets");//Kolesnik Note
 	if (item)
 	{
 		index = ITEM_INDEX(item);
@@ -1547,7 +1547,7 @@ always owned, never in the world
 /* precache */ ""
 	},
 
-/*QUAKED ammo_bullets (.3 .3 1) (-16 -16 -16) (16 16 16)
+/*QUAKED ammo_bullets (.3 .3 1) (-16 -16 -16) (16 16 16) Kolesnik Note
 */
 	{
 		"ammo_bullets",

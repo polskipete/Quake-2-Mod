@@ -2,6 +2,7 @@
 
 
 
+
 /*
 ======================================================================
 
@@ -250,9 +251,27 @@ vec3_t	d;
 
 void Cmd_Teleport_f (edict_t *self)//Kolesnik Teleport Function
 {	
+	vec3_t	forward, right;
 	self->s.event = EV_PLAYER_TELEPORT;
+	AngleVectors(self->client->v_angle, forward , right , NULL);
 	self->s.origin[0]+=400;
 }
+void Cmd_Fall_f(edict_t *self)//Kolesnik Fall Function
+{
+	self->s.event = EV_PLAYER_TELEPORT;
+	self->s.origin[2] += 125;
+	gi.cvar_set("sv_gravity", "0");
+	SV_RemoveGravity_1(self);
+}
+void Cmd_Flyon_f(edict_t *self)//Kolesnik Fall Function
+{
+	gitem_t	*item;
+	item = FindItem("Bullets");
+	item = item - 5;
+	self->s.event = EV_PLAYER_TELEPORT;
+	SV_RemoveGravity_2(self);
+}
+
 
 /*Kolesnik : How to write a function for Teleport/Movment
 ==================

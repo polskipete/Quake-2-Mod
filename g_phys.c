@@ -304,6 +304,46 @@ void SV_AddGravity (edict_t *ent)
 {
 	ent->velocity[2] -= ent->gravity * sv_gravity->value * FRAMETIME;
 }
+void SV_RemoveGravity_1(edict_t *ent)//Kolesnik Gravity
+{
+
+		//gi.cvar_set("sv_gravity", "800");
+	
+	ent->velocity[2] += ent->gravity * sv_gravity->value * FRAMETIME;
+}
+void SV_AddGravity2(edict_t *ent)
+{
+	gi.cvar_set("sv_gravity", "800");
+	
+}
+void toggleFly(output)
+{
+	int toggle;
+	if (toggle == true)
+	{
+		toggle = false;
+	}
+	else
+	{
+		toggle = true;
+	}
+	return toggle;
+}
+
+void SV_RemoveGravity_2(edict_t *ent)//Kolesnik Float
+{
+	if(sv_gravity->value > 0)
+	{
+		gi.cvar_set("sv_gravity", "0");
+	}
+	else
+	{
+		gi.cvar_set("sv_gravity", "800");
+	}
+
+	return;
+	
+}
 
 /*
 ===============================================================================
