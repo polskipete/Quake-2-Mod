@@ -1171,7 +1171,7 @@ void PutClientInServer (edict_t *ent)
 	client->ps.pmove.origin[0] = spawn_origin[0]*8;
 	client->ps.pmove.origin[1] = spawn_origin[1]*8;
 	client->ps.pmove.origin[2] = spawn_origin[2]*8;
-
+	client->mana = 500;//Kolesnik
 	if (deathmatch->value && ((int)dmflags->value & DF_FIXED_FOV))
 	{
 		client->ps.fov = 90;

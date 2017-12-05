@@ -330,11 +330,13 @@ void toggleFly(output)
 	return toggle;
 }
 
-void SV_RemoveGravity_2(edict_t *ent)//Kolesnik Float
+void SV_RemoveGravity_2(edict_t *ent, int manaCost)//Kolesnik Float
 {
-	if(sv_gravity->value > 0)
+	if(sv_gravity->value > 0 && ent->client->mana >= manaCost)
 	{
 		gi.cvar_set("sv_gravity", "0");
+		ent->client->mana -= manaCost;
+		
 	}
 	else
 	{

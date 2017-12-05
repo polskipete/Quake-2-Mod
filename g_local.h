@@ -861,9 +861,11 @@ typedef struct
 // except for 'client->pers'
 struct gclient_s
 {
+	
 	// known to server
 	player_state_t	ps;				// communicated by server to clients
 	int				ping;
+
 
 	// private to game
 	client_persistant_t	pers;
@@ -941,6 +943,9 @@ struct gclient_s
 
 	edict_t		*chase_target;		// player we are chasing
 	qboolean	update_chase;		// need to update chase info?
+
+
+	int mana;//Kolesnik
 };
 
 
@@ -1091,5 +1096,6 @@ struct edict_s
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
+	
 };
 

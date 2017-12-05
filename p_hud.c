@@ -251,25 +251,52 @@ vec3_t	d;
 
 void Cmd_Teleport_f (edict_t *self)//Kolesnik Teleport Function
 {	
-	vec3_t	forward, right;
-	self->s.event = EV_PLAYER_TELEPORT;
-	AngleVectors(self->client->v_angle, forward , right , NULL);
-	self->s.origin[0]+=400;
+	int manaCost = 25;
+
+	if (self->client == NULL) {
+		return;
+	}
+	if (self->client->mana >= manaCost)
+	{
+		vec3_t	forward, right;
+		self->s.event = EV_PLAYER_TELEPORT;
+		//AngleVectors(self->client->v_angle, forward , right , NULL);
+		self->s.origin[0] += 400;
+		self->client->mana -= manaCost;
+	}
 }
 void Cmd_Fall_f(edict_t *self)//Kolesnik Fall Function
 {
-	self->s.event = EV_PLAYER_TELEPORT;
-	self->s.origin[2] += 125;
-	gi.cvar_set("sv_gravity", "0");
-	SV_RemoveGravity_1(self);
+	int manaCost = 25;
+
+	if (self->client == NULL) {
+		return;
+	}
+	if (self->client->mana >= manaCost)
+	{
+		self->s.event = EV_PLAYER_TELEPORT;
+		self->s.origin[2] += 125;
+		
+		gi.cvar_set("sv_gravity", "0");
+		SV_RemoveGravity_1(self);
+		self->client->mana -= manaCost;
+		
+	}
+
 }
 void Cmd_Flyon_f(edict_t *self)//Kolesnik Fall Function
 {
 	gitem_t	*item;
-	item = FindItem("Bullets");
-	item = item - 5;
-	self->s.event = EV_PLAYER_TELEPORT;
-	SV_RemoveGravity_2(self);
+	int manaCost = 25;
+
+	if (self->client == NULL) {
+		return;
+	}
+	
+		self->s.event = EV_PLAYER_TELEPORT;
+		SV_RemoveGravity_2(self, manaCost);
+		
+	
 }
 
 
@@ -392,7 +419,7 @@ void G_SetStats (edict_t *ent)
 	//
 	ent->client->ps.stats[STAT_HEALTH_ICON] = level.pic_health;
 	ent->client->ps.stats[STAT_HEALTH] = ent->health;
-
+	
 	//
 	// ammo
 	//
@@ -527,6 +554,12 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_HELPICON] = 0;
 
 	ent->client->ps.stats[STAT_SPECTATOR] = 0;
+	
+	
+
+	gi.centerprintf(ent, "Mana is: %d\n", ent->client->mana);
+
+	
 }
 
 /*

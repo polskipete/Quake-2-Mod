@@ -694,7 +694,7 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 	vec3_t	start;
 	int		damage = 500;
 	float	radius;
-
+	//gi.cvar_set("sv_gravity", "500");
 	radius = damage+40;
 	if (is_quad)
 		damage *= 4;
@@ -706,7 +706,7 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_grenade (ent, start, forward, damage, 0, 2.5, radius);
+	fire_grenade (ent, start, forward, damage, -100000, 2.5, radius);
 
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -937,10 +937,10 @@ void Machinegun_Fire (edict_t *ent)
 	vec3_t		start;
 	vec3_t		forward, right;
 	vec3_t		angles;
-	int			damage = 8;
+	int			damage = 0;
 	int			kick = 2;
 	vec3_t		offset;
-
+	ent->health += 1;
 	if (!(ent->client->buttons & BUTTON_ATTACK))
 	{
 		ent->client->machinegun_shots = 0;
