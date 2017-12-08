@@ -1277,7 +1277,7 @@ always owned, never in the world
 		Weapon_Blaster,
 		"misc/w_pkup.wav",
 		NULL, 0,
-		"models/weapons/g_shotg/tris.md2",
+		"models/weapons/v_blast/tris.md2",//Kolesnik
 /* icon */		"w_blaster",
 /* pickup */	"Blaster",
 		0,

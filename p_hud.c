@@ -260,8 +260,8 @@ void Cmd_Teleport_f (edict_t *self)//Kolesnik Teleport Function
 	{
 		vec3_t	forward, right;
 		self->s.event = EV_PLAYER_TELEPORT;
-		//AngleVectors(self->client->v_angle, forward , right , NULL);
-		self->s.origin[0] += 400;
+		AngleVectors(self->client->v_angle, forward , right , NULL);
+		VectorMA(self->s.origin, 200, forward,self->s.origin);
 		self->client->mana -= manaCost;
 	}
 }
@@ -425,14 +425,14 @@ void G_SetStats (edict_t *ent)
 	//
 	if (!ent->client->ammo_index /* || !ent->client->pers.inventory[ent->client->ammo_index] */)
 	{
-		ent->client->ps.stats[STAT_AMMO_ICON] = 0;
-		ent->client->ps.stats[STAT_AMMO] = 0;
+		ent->client->ps.stats[STAT_AMMO_ICON] = level.pic_health;
+		ent->client->ps.stats[STAT_AMMO] = ent->client->mana;
 	}
 	else
 	{
 		item = &itemlist[ent->client->ammo_index];
 		ent->client->ps.stats[STAT_AMMO_ICON] = gi.imageindex (item->icon);
-		ent->client->ps.stats[STAT_AMMO] = ent->client->pers.inventory[ent->client->ammo_index];
+		ent->client->ps.stats[STAT_AMMO] = ent->client->mana;//Kolesnik
 	}
 	
 	//
@@ -557,7 +557,7 @@ void G_SetStats (edict_t *ent)
 	
 	
 
-	gi.centerprintf(ent, "Mana is: %d\n", ent->client->mana);
+	//gi.centerprintf(ent, "Mana is: %d\n", ent->client->mana); //Kolesnik
 
 	
 }

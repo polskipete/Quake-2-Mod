@@ -376,15 +376,15 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 fire_grenade
 =================
 */
-static void Grenade_Explode (edict_t *ent)
+static void Grenade_Explode (edict_t *ent)//Kolesnik
 {
 	vec3_t		origin;
 	int			mod;
 
 	if (ent->owner->client)
 		PlayerNoise(ent->owner, ent->s.origin, PNOISE_IMPACT);
-
-	//FIXME: if we are onground then raise our Z just a bit since we are a point?
+	
+	//FIXME: if we are onground then raise our Z just a bit since we are a point? Kolesnik
 	if (ent->enemy)
 	{
 		float	points;
@@ -395,7 +395,8 @@ static void Grenade_Explode (edict_t *ent)
 		VectorMA (ent->enemy->s.origin, 0.5, v, v);
 		VectorSubtract (ent->s.origin, v, v);
 		points = ent->dmg - 0.5 * VectorLength (v);
-		VectorSubtract (ent->enemy->s.origin, ent->s.origin, dir);
+		
+		
 		if (ent->spawnflags & 1)
 			mod = MOD_HANDGRENADE;
 		else
@@ -431,6 +432,7 @@ static void Grenade_Explode (edict_t *ent)
 	gi.multicast (ent->s.origin, MULTICAST_PHS);
 
 	G_FreeEdict (ent);
+	
 }
 
 static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)

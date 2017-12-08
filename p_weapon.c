@@ -709,7 +709,7 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 		VectorScale(forward, -2, ent->client->kick_origin);
 		ent->client->kick_angles[0] = -1;
 
-		fire_grenade(ent, start, forward, damage, -100000, 2.5, radius);
+		fire_grenade(ent, start, forward, damage, 0, 2.5, radius);
 
 		gi.WriteByte(svc_muzzleflash);
 		gi.WriteShort(ent - g_edicts);
@@ -719,6 +719,8 @@ void weapon_grenadelauncher_fire (edict_t *ent)
 		ent->client->ps.gunframe++;
 
 		PlayerNoise(ent, start, PNOISE_WEAPON);
+
+		
 		ent->client->mana -= manaCost;
 	}//Kolesnik
 	
@@ -1305,7 +1307,7 @@ void weapon_railgun_fire (edict_t *ent)
 		else
 		{
 			damage = 25;
-			kick = 3000;
+			kick = 30000;
 		}
 
 		if (is_quad)
