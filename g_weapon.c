@@ -443,6 +443,7 @@ static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurfa
 	if (surf && (surf->flags & SURF_SKY))
 	{
 		G_FreeEdict (ent);
+		Grenade_Explode(ent);
 		return;
 	}
 
@@ -465,7 +466,15 @@ static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurfa
 	ent->enemy = other;
 	Grenade_Explode (ent);
 }
-
+void dropNade(edict_t *ent)
+{
+	
+	ent->s.origin[2] -= 35;
+	//gi.centerprintf(ent->owner, "%d %d %d", ent->s.origin[0], ent->s.origin[1], ent->s.origin[2]);
+	ent->nextthink = level.time + FRAMETIME;
+	if (!Grenade_Touch)
+		Grenade_Explode(ent);
+}
 void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius)
 {
 	edict_t	*grenade;
@@ -490,8 +499,8 @@ void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int s
 	grenade->s.modelindex = gi.modelindex ("models/objects/grenade/tris.md2");
 	grenade->owner = self;
 	grenade->touch = Grenade_Touch;
-	grenade->nextthink = level.time + timer;
-	grenade->think = Grenade_Explode;
+	grenade->nextthink = level.time;
+	grenade->think = dropNade;//Grenade_Explode;
 	grenade->dmg = damage;
 	grenade->dmg_radius = damage_radius;
 	grenade->classname = "grenade";
@@ -523,8 +532,8 @@ void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int 
 	grenade->s.modelindex = gi.modelindex ("models/objects/grenade2/tris.md2");
 	grenade->owner = self;
 	grenade->touch = Grenade_Touch;
-	grenade->nextthink = level.time + timer;
-	grenade->think = Grenade_Explode;
+	grenade->nextthink = level.time;
+	grenade->think = dropNade;//Kolesnik
 	grenade->dmg = damage;
 	grenade->dmg_radius = damage_radius;
 	grenade->classname = "hgrenade";
