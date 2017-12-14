@@ -15,3 +15,5 @@ Explosive Potion (Grenade Launcher): Grenade falls down when launched, explodes 
 Healing Ray(Machinegun): Heal per second 
 
 Special Weapons and abilites use MANA, which can be spotted next to were ammo use to be
+
+Drag This Folder into quake 2 folder and set shortcut with \quake2.exe" +set game crazyWizard
